@@ -111,63 +111,22 @@ void moveArm() {
 	double theta_base=0, theta_2=0, theta_3=0, theta_4=0;
 	double theta_link_1=0 , theta_link_2=0;
 	double theta_link_1p=0, theta_link_2p=0;
-	int n =0, m=0;
-	double grid_spacing_n =0, grid_spacing_m =0, x_cordinate=0,y_cordinate=0,z_cordinate =0;
+	
+	double x_cordinate=0,y_cordinate=0,z_cordinate =0;
 
-// ------------------------------------------------------------------
-			
-	std::cout << endl << " -------------- Co-ordiantes of Point Location ------------ : " << endl;
-	std::cout << "Enter the  X-Cordinate : ";
-	cin>> x_cordinate;
-	std::cout << endl;
-			
-	std::cout << "Enter the  Y-Cordinate : ";
-	cin>> y_cordinate;
-	std::cout << endl;
-			
-	std::cout << "Enter the  Z-Cordinate : ";
-	cin>> z_cordinate;
-	std::cout << endl;
-			
-			
-			
-			
-			
-			
-			// -------------------------------------------------------------------
-			
-	std::cout << " -------------- GRID GENERATON ------------ : " << endl;
-	std::cout << "Enter the Number of points in X-Direction : ";
-	cin>> n;
-	std::cout << endl;
-			
-	std::cout << "Enter the Number of points in Y-Direction : ";
-	cin>> m;
-	std::cout << endl;
-			
-	std::cout << "Enter the Grid Spacing in X-Direction : ";
-	cin>> grid_spacing_n;
-	std::cout << endl;
-			
-	std::cout << "Enter the Grid Spacing in Y-Direction : ";
-	cin>> grid_spacing_m;
-	std::cout << endl;
 
 //-------------------------------------------------------
 
-	for (double x =0; x< n; x++ ){
-		for (double y =0; y<m; y++){
-			double px_p = grid_spacing_n*x;
-			double py_p = grid_spacing_m*y;
+	for (double t =0; t< 100; x++ ){
+		
+			double gam = M_PI*t/50;
 			
-			double px = x_cordinate + px_p;
-			double py = -y_cordinate + py_p;
-			double pz = z_cordinate;
+			
+			double px = 0.3;
+			double py = 0.26+0.07*sin(gam);
+			double pz = 0.07*cos(gam);
 			  
 			
-
-
-			py = py + 0.03;
 			
 			double theta_base = atan2 (py,px);
 			
@@ -196,7 +155,7 @@ void moveArm() {
 			
 			
 			
-			std :: cout << theta_base << std::endl;
+			std::cout << theta_base << std::endl;
 
 			double l1 = 0.302 - 0.147;
 			double l2 = 0.437 - 0.302;
@@ -259,21 +218,30 @@ void moveArm() {
 			msg = createArmPositionCommand(jointvalues);
 			armPublisher.publish(msg);
 
-			ros::Duration(2).sleep();	
+			# ros::Duration(2).sleep();	
 			}
-		}
 	}
-	// move arm back close to calibration position
-			jointvalues[0] = 0.11;
-			jointvalues[1] = 0.11;
-			jointvalues[2] = -0.11;
-			jointvalues[3] = 0.11;
-			jointvalues[4] = 0.111;
-			msg = createArmPositionCommand(jointvalues);
-			armPublisher.publish(msg);
-
-			ros::Duration(2).sleep();
+	
 		
+}
+
+void moveArmBack() {
+	brics_actuator::JointPositions msg;
+	std::vector<double> jointvalues(5);
+	
+	jointvalues[0] = 0.11;
+	jointvalues[1] = 0.11;
+	jointvalues[2] = -0.11;
+	jointvalues[3] = 0.11;
+	jointvalues[4] = 0.111;
+	msg = createArmPositionCommand(jointvalues);
+	armPublisher.publish(msg);
+	
+	ros::Duration(2).sleep();
+
+
+
+
 }
 
 
@@ -303,7 +271,8 @@ int main(int argc, char **argv) {
 
 	movePlatform();
 	moveArm();
-	moveGripper();
+	moveArmBack();
+	# moveGripper();
 
 	sleep(1);
 	ros::shutdown();
