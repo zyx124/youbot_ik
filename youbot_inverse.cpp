@@ -117,7 +117,7 @@ void moveArm() {
 
 //-------------------------------------------------------
 
-	for (double t =0; t< 100; x++ ){
+	for (double t =0; t< 100; t++ ){
 		
 			double gam = M_PI*t/50;
 			
@@ -218,7 +218,7 @@ void moveArm() {
 			msg = createArmPositionCommand(jointvalues);
 			armPublisher.publish(msg);
 
-			# ros::Duration(2).sleep();	
+				
 			}
 	}
 	
@@ -272,7 +272,7 @@ int main(int argc, char **argv) {
 	movePlatform();
 	moveArm();
 	moveArmBack();
-	# moveGripper();
+	
 
 	sleep(1);
 	ros::shutdown();
