@@ -16,18 +16,14 @@ The RRT_planning is a package to perform RRT in ROS. MoveIt service is used in t
 
 Instructions: 
 
-'''
-
-​	roslaunch motion_planning kuka_lwr.launch
-
-'''
+```
+roslaunch motion_planning kuka_lwr.launch
+```
 
 Then open a new terminal:
 
-'''
-
-​	rosrun rrt mp.py
-
-'''
+```
+rosrun rrt mp.py
+```
 
 You can drag the marker using mouse and right click to choose to start planning. Several obstacles are also provided to test the algorithm.
