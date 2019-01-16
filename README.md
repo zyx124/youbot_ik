@@ -4,7 +4,7 @@ The cpp code is modified based on the hello_world_demo of kuka youbot.
 
 The diagrams are shown below to demonstrate how the coordinates are set up and how to obtain the geometric solution.
 
-![coordinate][https://github.com/zyx124/youbot_ik/blob/master/diagram.jpg]
+![coordinate][https://raw.githubusercontent.com/zyx124/youbot_ik/master/diagram.jpg]
 
 
 
