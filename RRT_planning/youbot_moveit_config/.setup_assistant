@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: youbot_description
+    relative_path: robots/youbot_arm_only.urdf.xacro
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/youbot.srdf
+  CONFIG:
+    author_name: Yuxin Zhao
+    author_email: zhaoyuxin124@gmail.com
+    generated_timestamp: 1547655679
